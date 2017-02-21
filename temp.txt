@@ -1,0 +1,18 @@
+static propTypes = {
+    from: PropTypes.string,
+    characters: PropTypes.array
+}
+
+static defaultProps = {
+    from: 'nobody',
+    characters: []
+}
+
+static async getInitialProps ({ req }) {
+
+    const res = await fetch('//swapi.co/api/people/')
+    const json = await res.json()
+    console.log(json)
+
+    return { characters: json.results, from: req ? 'server' : 'client' }
+}
